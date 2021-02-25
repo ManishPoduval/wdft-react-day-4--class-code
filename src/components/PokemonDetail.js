@@ -1,12 +1,11 @@
 import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 
-
 function PokemonDetail(props) {
-
     const [pokemon, updatePokemon] = useState({})
 
     const getPokemon = () => {
+        // this
         let id = props.match.params.pokemonId
         axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
             .then((response) => {
