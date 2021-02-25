@@ -1,10 +1,10 @@
-import React, { useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import axios from 'axios'
 
 
 function PokemonDetail(props) {
 
-    const [pokemon, updatePokemon] = useEffect({})
+    const [pokemon, updatePokemon] = useState({})
 
     const getPokemon = () => {
         let id = props.match.params.pokemonId
@@ -33,7 +33,7 @@ function PokemonDetail(props) {
         let id = props.match.params.pokemonId
         console.log('-----------------------------')
         console.log('ID is did update is', id)
-        console.log('state id is', this.state.pokemon.id)
+        console.log('state id is', pokemon.id)
         if (pokemon.id !== id) {
             getPokemon()
         }
