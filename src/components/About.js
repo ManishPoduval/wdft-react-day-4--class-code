@@ -1,16 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class About extends Component {
 
-    render() {
-        console.log(this.props)
-
-        return (
-            <div>
-                This is our About page
-            </div>
-        )
-    }
+function About() {
+    return (
+        <div>
+            This is our About page
+        </div>
+    )
 }
 
 export default About

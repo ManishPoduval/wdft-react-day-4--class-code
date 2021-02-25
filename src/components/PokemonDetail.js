@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
+import React, { useEffect} from 'react'
 import axios from 'axios'
 
-class PokemonDetail extends Component {
 
-    state = {
-        pokemon: {}
-    }
+function PokemonDetail(props) {
 
-    getPokemon = () => {
-        let id = this.props.match.params.pokemonId
+    const [pokemon, updatePokemon] = useEffect({})
+
+    const getPokemon = () => {
+        let id = props.match.params.pokemonId
         axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
             .then((response) => {
                 let pokemon = {
@@ -18,44 +17,36 @@ class PokemonDetail extends Component {
                     image: response.data.sprites.other.dream_world.front_default
                 }
 
-                this.setState({
-                    pokemon: pokemon
-                })
+                updatePokemon(pokemon)
             })
     }
 
-    componentDidMount(){
+    useEffect(() => {
         console.log('Detail Component Mounted')
-        this.getPokemon()
-    }
+        getPokemon()
+    }, [])
 
-    componentDidUpdate(){
+    useEffect(() => {
         console.log('Detail Component Updated')
         // some comparison ?????????
         // compare the new one with the one in state
-        let id = this.props.match.params.pokemonId
+        let id = props.match.params.pokemonId
         console.log('-----------------------------')
         console.log('ID is did update is', id)
         console.log('state id is', this.state.pokemon.id)
-        if (this.state.pokemon.id !== id) {
-            this.getPokemon()
+        if (pokemon.id !== id) {
+            getPokemon()
         }
-        //this.getPokemon()
-    }
+    })
 
-
-    render() {
-        
-        const {pokemon: {image, height}, pokemon} = this.state
-        console.log('Render, pokemon is', pokemon.id )
-        return (
-            <div>
-                Pokemon Detail page
-                <img src={image}/>
-                <h3>Height: {height}</h3>
-            </div>
-        )
-    }
+    const {image, height} = pokemon
+    return (
+        <div>
+            Pokemon Detail page
+            <img src={image}/>
+            <h3>Height: {height}</h3>
+        </div>
+    )
 }
 
 export default PokemonDetail
