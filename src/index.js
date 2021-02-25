@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import PokemonApp from './PokemonApp'
+import 'bulma/css/bulma.css'
+
+import {BrowserRouter} from 'react-router-dom'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // Always wrap your app in BrowserRouter
+  <BrowserRouter>
+    <React.StrictMode>
+      <PokemonApp />
+    </React.StrictMode>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
